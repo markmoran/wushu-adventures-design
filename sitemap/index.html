@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wushu Adventures — Sitemap v1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!--
+    WA Placeholder Colors (pending style guide):
+    Home node:  #1c1a2e (deep navy)
+    Nav cards:  #8b1e1e (Chinese red)
+    Accent:     #c8a96e (gold)
+    These will be updated once the WA style guide is complete.
+  -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f7f7f5;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      color: #1a1a1a;
+      padding: 32px 24px 60px;
+    }
+
+    /* ── Version Banner ──────────────────────────────────── */
+    .version-banner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      background: #1c1a2e;
+      color: #fff;
+      border-radius: 10px 10px 0 0;
+      padding: 18px 24px;
+      flex-wrap: wrap;
+    }
+
+    .version-banner-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .banner-client {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #c8a96e;
+    }
+
+    .banner-tagline {
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+    }
+
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(200, 169, 110, 0.2);
+      border: 1px solid rgba(200, 169, 110, 0.4);
+      color: #c8a96e;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+
+    /* ── Changelog Strip ─────────────────────────────────── */
+    .changelog-strip {
+      background: #252338;
+      border-radius: 0;
+      padding: 12px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #8b1e1e;
+    }
+
+    .changelog-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .changelog-entries {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cl-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 4px;
+      padding: 3px 9px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .cl-new {
+      background: rgba(139, 196, 0, 0.15);
+      color: #8bc400;
+      border: 1px solid rgba(139, 196, 0, 0.3);
+    }
+
+    /* ── Connector (vertical line from banner to home) ───── */
+    .v-connector {
+      width: 2px;
+      background: #c8c8c8;
+      margin: 0 auto;
+    }
+    .v-connector-short { height: 20px; }
+    .v-connector-tall  { height: 28px; }
+
+    /* ── Home Node ───────────────────────────────────────── */
+    .home-node {
+      background: #1c1a2e;
+      border-radius: 8px;
+      padding: 20px 24px;
+      color: #fff;
+      position: relative;
+    }
+
+    .home-node-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .home-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(200,169,110,0.2);
+      border: 1.5px solid rgba(200,169,110,0.5);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .home-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .home-url {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+      margin-left: 4px;
+    }
+
+    .home-sections-label {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 10px;
+    }
+
+    .home-sections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .home-sections-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .home-section-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .home-section-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: #c8a96e;
+      margin-bottom: 3px;
+    }
+
+    .home-section-desc {
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.45;
+    }
+
+    /* ── SVG Connector (JS-drawn) ────────────────────────── */
+    #svg-connector {
+      display: block;
+      width: 100%;
+      overflow: visible;
+    }
+
+    /* ── Nav Columns ─────────────────────────────────────── */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .nav-column {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    /* ── Nav Card (top of column) ────────────────────────── */
+    .nav-card {
+      background: #8b1e1e;
+      border-radius: 7px;
+      padding: 12px 14px;
+      color: #fff;
+      position: relative;
+    }
+
+    .nav-card-url {
+      font-size: 9px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 400;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .nav-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .nav-card-desc {
+      font-size: 10px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+    /* ── Page Card (child pages) ─────────────────────────── */
+    .page-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 9px 12px;
+      margin-left: 14px;
+      position: relative;
+    }
+
+    /* connector nub */
+    .page-card::before {
+      content: '';
+      position: absolute;
+      left: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 1.5px;
+      background: #bbb;
+    }
+
+    .page-card-url {
+      font-size: 9px;
+      color: #999;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .page-card-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.25;
+    }
+
+    .page-card-desc {
+      font-size: 10px;
+      color: #777;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    /* Collection (multiple child pages pattern) */
+    .page-card.collection {
+      background: #e8e8e8;
+      border-style: dashed;
+    }
+
+    .page-card.collection .page-card-title {
+      font-style: italic;
+    }
+
+    .collection-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 500;
+      color: #888;
+      background: #d8d8d8;
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Sections list inside nav card */
+    .nav-sections {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .nav-sections-label {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 5px;
+    }
+
+    .nav-section-item {
+      font-size: 10px;
+      color: rgba(255,255,255,0.65);
+      padding: 2px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      line-height: 1.4;
+    }
+
+    .nav-section-item::before {
+      content: '—';
+      color: rgba(200,169,110,0.6);
+      font-size: 9px;
+      flex-shrink: 0;
+    }
+
+    /* Tag chips for filters/categories */
+    .tag-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 5px;
+    }
+
+    .tag-chip {
+      font-size: 9px;
+      font-weight: 500;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.7);
+      border-radius: 3px;
+      padding: 1px 6px;
+    }
+
+    .tag-chip-dark {
+      font-size: 9px;
+      font-weight: 500;
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      color: #555;
+      border-radius: 3px;
+      padding: 1px 6px;
+    }
+
+    /* View badges */
+    .view-badges {
+      display: flex;
+      gap: 4px;
+      margin-top: 5px;
+    }
+
+    .view-badge {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(200,169,110,0.2);
+      color: #c8a96e;
+      border: 1px solid rgba(200,169,110,0.35);
+      border-radius: 3px;
+      padding: 2px 6px;
+    }
+
+    /* ── Legend ──────────────────────────────────────────── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      margin-top: 32px;
+      padding: 16px 20px;
+      background: #eeede9;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .legend-title {
+      width: 100%;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      color: #444;
+    }
+
+    .legend-swatch {
+      width: 22px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .swatch-home    { background: #1c1a2e; }
+    .swatch-nav     { background: #8b1e1e; }
+    .swatch-page    { background: #fff; border: 1px solid #ddd; }
+    .swatch-collect { background: #e8e8e8; border: 1px dashed #bbb; }
+
+    /* ── Misc ────────────────────────────────────────────── */
+    .section-spacer { height: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- Version Banner -->
+<div class="version-banner">
+  <div class="version-banner-left">
+    <span class="banner-client">Wushu Adventures</span>
+    <span class="banner-tagline">wushuadventures.com — Exploring the World of Chinese Martial Arts</span>
+    <span class="version-badge">Site Map v1</span>
+  </div>
+  <div style="text-align:right; color:rgba(255,255,255,0.35); font-size:10px; padding-top:4px; line-height:1.6;">
+    June 2026<br>
+    Full Site Redesign
+  </div>
+</div>
+
+<!-- Changelog Strip -->
+<div class="changelog-strip">
+  <span class="changelog-label">v1 Changes</span>
+  <div class="changelog-entries">
+    <span class="cl-pill cl-new">Initial IA — full site redesign</span>
+    <span class="cl-pill cl-new">Added: School Directory</span>
+    <span class="cl-pill cl-new">Added: Events Calendar</span>
+    <span class="cl-pill cl-new">Added: Videos section</span>
+    <span class="cl-pill cl-new">Added: Start Here</span>
+    <span class="cl-pill cl-new">Added: Work With Me</span>
+  </div>
+</div>
+
+<!-- V-Connector: banner → home -->
+<div class="v-connector v-connector-short"></div>
+
+<!-- Home Node -->
+<div class="home-node" id="home-node">
+  <div class="home-node-header">
+    <div class="home-icon">⌂</div>
+    <div>
+      <span class="home-title">Home</span>
+      <span class="home-url">/</span>
+    </div>
+  </div>
+  <div class="home-sections-label">Page Sections</div>
+  <div class="home-sections-grid">
+    <div class="home-section-card">
+      <div class="home-section-name">Hero</div>
+      <div class="home-section-desc">Tagline, mission statement, primary CTA — Find a School or Start Here</div>
+    </div>
+    <div class="home-section-card">
+      <div class="home-section-name">Featured Articles</div>
+      <div class="home-section-desc">3 curated or recent blog posts from across all categories</div>
+    </div>
+    <div class="home-section-card">
+      <div class="home-section-name">Video Highlights</div>
+      <div class="home-section-desc">2–3 featured YouTube embeds from the WA channel</div>
+    </div>
+    <div class="home-section-card">
+      <div class="home-section-name">School Directory CTA</div>
+      <div class="home-section-desc">Teaser with search bar or Browse Schools button linking to /schools/</div>
+    </div>
+    <div class="home-section-card">
+      <div class="home-section-name">Events Preview</div>
+      <div class="home-section-desc">Next 2–3 upcoming tournaments, seminars, or clinics</div>
+    </div>
+    <div class="home-section-card">
+      <div class="home-section-name">Newsletter &amp; Follow</div>
+      <div class="home-section-desc">Email signup, Instagram + YouTube social links</div>
+    </div>
+  </div>
+</div>
+
+<!-- SVG connector: home → nav columns (drawn by JS) -->
+<svg id="svg-connector" height="40"></svg>
+
+<!-- Nav Columns Grid -->
+<div class="nav-grid" id="nav-grid">
+
+  <!-- 1. About -->
+  <div class="nav-column" id="col-about">
+    <div class="nav-card">
+      <span class="nav-card-url">/about/</span>
+      <div class="nav-card-title">About</div>
+      <div class="nav-card-desc">Personal story, 30 years in wushu, WA mission, credentials, and what drives the project</div>
+    </div>
+  </div>
+
+  <!-- 2. Start Here -->
+  <div class="nav-column" id="col-start">
+    <div class="nav-card">
+      <span class="nav-card-url">/start-here/</span>
+      <div class="nav-card-title">Start Here</div>
+      <div class="nav-card-desc">Entry point for new visitors — what WA is, who it's for, and how to navigate the site</div>
+    </div>
+    <div class="page-card">
+      <span class="page-card-url">/intro-to-wushu/</span>
+      <div class="page-card-title">Introduction to Wushu</div>
+      <div class="page-card-desc">What is wushu, history, major styles, why it matters</div>
+    </div>
+  </div>
+
+  <!-- 3. Blog -->
+  <div class="nav-column" id="col-blog">
+    <div class="nav-card">
+      <span class="nav-card-url">/blog/</span>
+      <div class="nav-card-title">Blog</div>
+      <div class="nav-card-desc">Article archive with category filtering</div>
+      <div class="nav-sections">
+        <div class="nav-sections-label">Categories</div>
+        <div class="tag-chips">
+          <span class="tag-chip">Adventures</span>
+          <span class="tag-chip">Training</span>
+          <span class="tag-chip">Wushu in China</span>
+          <span class="tag-chip">Guides</span>
+          <span class="tag-chip">Culture &amp; Language</span>
+        </div>
+      </div>
+    </div>
+    <div class="page-card collection">
+      <span class="page-card-url">/blog/[post-slug]/</span>
+      <div class="page-card-title">Single Post</div>
+      <div class="page-card-desc">Individual article — full content, related posts, category tag</div>
+      <span class="collection-tag">Collection</span>
+    </div>
+  </div>
+
+  <!-- 4. Videos -->
+  <div class="nav-column" id="col-videos">
+    <div class="nav-card">
+      <span class="nav-card-url">/videos/</span>
+      <div class="nav-card-title">Videos</div>
+      <div class="nav-card-desc">Curated YouTube content — embed grid pulled from WA channel</div>
+    </div>
+  </div>
+
+  <!-- 5. Schools -->
+  <div class="nav-column" id="col-schools">
+    <div class="nav-card">
+      <span class="nav-card-url">/schools/</span>
+      <div class="nav-card-title">School Directory</div>
+      <div class="nav-card-desc">Global CMA school database — searchable and filterable</div>
+      <div class="nav-sections">
+        <div class="nav-sections-label">Filters</div>
+        <div class="tag-chips">
+          <span class="tag-chip">Style</span>
+          <span class="tag-chip">Country</span>
+          <span class="tag-chip">School Type</span>
+          <span class="tag-chip">Programs</span>
+          <span class="tag-chip">Language</span>
+        </div>
+        <div class="view-badges" style="margin-top:6px">
+          <span class="view-badge">Grid</span>
+          <span class="view-badge">List</span>
+          <span class="view-badge">Map</span>
+        </div>
+      </div>
+    </div>
+    <div class="page-card collection">
+      <span class="page-card-url">/schools/[slug]/</span>
+      <div class="page-card-title">School Profile</div>
+      <div class="page-card-desc">Contact, about, instructor bio, styles taught, location map</div>
+      <span class="collection-tag">Collection</span>
+    </div>
+  </div>
+
+  <!-- 6. Events -->
+  <div class="nav-column" id="col-events">
+    <div class="nav-card">
+      <span class="nav-card-url">/events/</span>
+      <div class="nav-card-title">Events</div>
+      <div class="nav-card-desc">Wushu events calendar — powered by Pie Calendar</div>
+      <div class="nav-sections">
+        <div class="nav-sections-label">Categories</div>
+        <div class="tag-chips">
+          <span class="tag-chip">Tournaments</span>
+          <span class="tag-chip">Seminars</span>
+          <span class="tag-chip">Workshops</span>
+          <span class="tag-chip">Clinics</span>
+          <span class="tag-chip">Judge Certs</span>
+        </div>
+      </div>
+    </div>
+    <div class="page-card collection">
+      <span class="page-card-url">/events/[slug]/</span>
+      <div class="page-card-title">Single Event</div>
+      <div class="page-card-desc">Date, venue, organizer, registration link</div>
+      <span class="collection-tag">Collection</span>
+    </div>
+  </div>
+
+  <!-- 7. Work With Me -->
+  <div class="nav-column" id="col-work">
+    <div class="nav-card">
+      <span class="nav-card-url">/work-with-me/</span>
+      <div class="nav-card-title">Work With Me</div>
+      <div class="nav-card-desc">Services offered + contact form</div>
+      <div class="nav-sections">
+        <div class="nav-sections-label">Services</div>
+        <div class="nav-section-item">Web Design for MA Schools</div>
+        <div class="nav-section-item">Consulting &amp; Coaching</div>
+        <div class="nav-section-item">Judging &amp; Clinics</div>
+        <div class="nav-section-item">Content &amp; Media</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Contact -->
+  <div class="nav-column" id="col-contact">
+    <div class="nav-card">
+      <span class="nav-card-url">/contact/</span>
+      <div class="nav-card-title">Contact</div>
+      <div class="nav-card-desc">Fallback contact page — linked from Work With Me footer</div>
+    </div>
+  </div>
+
+</div><!-- /nav-grid -->
+
+<div class="section-spacer"></div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-title">Legend</div>
+  <div class="legend-item"><div class="legend-swatch swatch-home"></div>Home</div>
+  <div class="legend-item"><div class="legend-swatch swatch-nav"></div>Primary Navigation</div>
+  <div class="legend-item"><div class="legend-swatch swatch-page"></div>Standalone Page</div>
+  <div class="legend-item"><div class="legend-swatch swatch-collect"></div>Collection (multiple pages)</div>
+</div>
+
+<div style="margin-top:16px; font-size:10px; color:#aaa; text-align:center;">
+  Wushu Adventures — wushuadventures.com &nbsp;·&nbsp; Site Map v1 &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Colors are placeholder pending WA style guide
+</div>
+
+<script>
+  // Draw SVG horizontal connector between home node and nav columns
+  window.addEventListener('load', function () {
+    const svg    = document.getElementById('svg-connector');
+    const home   = document.getElementById('home-node');
+    const grid   = document.getElementById('nav-grid');
+    const cols   = grid.querySelectorAll('.nav-column');
+    if (!cols.length) return;
+
+    const svgRect  = svg.getBoundingClientRect();
+    const homeRect = home.getBoundingClientRect();
+    const homeBot  = homeRect.bottom - svgRect.top;
+    const homeMid  = homeRect.left + homeRect.width / 2 - svgRect.left;
+    const svgH     = svg.height.baseVal.value;
+    const midY     = svgH / 2;
+
+    // Horizontal trunk line
+    const firstCol = cols[0].getBoundingClientRect();
+    const lastCol  = cols[cols.length - 1].getBoundingClientRect();
+    const lineLeft  = firstCol.left + firstCol.width / 2 - svgRect.left;
+    const lineRight = lastCol.left  + lastCol.width  / 2 - svgRect.left;
+
+    const ns = 'http://www.w3.org/2000/svg';
+
+    // Stem down from home
+    const stem = document.createElementNS(ns, 'line');
+    stem.setAttribute('x1', homeMid); stem.setAttribute('y1', 0);
+    stem.setAttribute('x2', homeMid); stem.setAttribute('y2', midY);
+    stem.setAttribute('stroke', '#c0bbb0'); stem.setAttribute('stroke-width', '2');
+    svg.appendChild(stem);
+
+    // Horizontal trunk
+    const trunk = document.createElementNS(ns, 'line');
+    trunk.setAttribute('x1', lineLeft);  trunk.setAttribute('y1', midY);
+    trunk.setAttribute('x2', lineRight); trunk.setAttribute('y2', midY);
+    trunk.setAttribute('stroke', '#c0bbb0'); trunk.setAttribute('stroke-width', '2');
+    svg.appendChild(trunk);
+
+    // Drop lines to each column
+    cols.forEach(function (col) {
+      const rect = col.getBoundingClientRect();
+      const cx   = rect.left + rect.width / 2 - svgRect.left;
+      const drop = document.createElementNS(ns, 'line');
+      drop.setAttribute('x1', cx); drop.setAttribute('y1', midY);
+      drop.setAttribute('x2', cx); drop.setAttribute('y2', svgH);
+      drop.setAttribute('stroke', '#c0bbb0'); drop.setAttribute('stroke-width', '2');
+      svg.appendChild(drop);
+    });
+  });
+</script>
+</body>
+</html>
