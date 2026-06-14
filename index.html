@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wushu Adventures — Design Portal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --border: #2a2a2a;
+      --accent: #c8a96e;
+      --accent-dim: #9a7d4e;
+      --text: #e8e4dc;
+      --text-muted: #777;
+      --red: #8b2020;
+      --green: #2a6b3a;
+      --yellow: #7a6020;
+      --radius: 6px;
+      --font-mono: 'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+
+    .site-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+
+    .site-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2.5rem;
+    }
+
+    section + section {
+      margin-top: 3.5rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .deliverable-card {
+      background: var(--surface);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .deliverable-card:hover {
+      background: #1c1c1c;
+    }
+
+    .deliverable-card.disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .card-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.5rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      width: fit-content;
+    }
+
+    .status-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status-live {
+      background: rgba(42, 107, 58, 0.2);
+      color: #5bc47a;
+      border: 1px solid rgba(42, 107, 58, 0.4);
+    }
+    .status-live::before { background: #5bc47a; }
+
+    .status-pending {
+      background: rgba(122, 96, 32, 0.2);
+      color: #c8a040;
+      border: 1px solid rgba(122, 96, 32, 0.4);
+    }
+    .status-pending::before { background: #c8a040; }
+
+    .status-draft {
+      background: rgba(42, 42, 42, 0.6);
+      color: #666;
+      border: 1px solid #2a2a2a;
+    }
+    .status-draft::before { background: #555; }
+
+    .ia-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .ia-table th {
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ia-table td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .ia-table tr:last-child td { border-bottom: none; }
+
+    .ia-table tr:hover td { background: #141414; }
+
+    .url-code {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-dim);
+    }
+
+    .ia-note {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .progress-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.4s;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="site-title">Wushu Adventures</span>
+  <span class="site-subtitle">design portal / v1</span>
+</header>
+
+<main>
+
+  <!-- Progress -->
+  <section>
+    <div class="section-label">Project Progress</div>
+    <div class="progress-bar"><div class="progress-fill" style="width: 5%"></div></div>
+    <p style="font-size:0.8rem; color:var(--text-muted);">Phase: Discovery &amp; IA — 1 of 4 phases complete</p>
+  </section>
+
+  <!-- Deliverables -->
+  <section>
+    <div class="section-label">Deliverables</div>
+    <div class="deliverable-grid">
+
+      <a href="sitemap/index.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">01 — IA</span>
+        <span class="card-title">Site Map</span>
+        <span class="card-desc">Full information architecture diagram for the WA redesign</span>
+        <span class="status-badge status-pending">Pending</span>
+      </a>
+
+      <a href="wireframes/homepage.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">02 — Wireframe</span>
+        <span class="card-title">Homepage</span>
+        <span class="card-desc">Hero, featured content, school CTA, events preview</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+      <a href="wireframes/blog.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">03 — Wireframe</span>
+        <span class="card-title">Blog Archive</span>
+        <span class="card-desc">Article listing with category filters</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+      <a href="wireframes/schools.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">04 — Wireframe</span>
+        <span class="card-title">School Directory</span>
+        <span class="card-desc">Grid/list archive with style, country, type filters</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+      <a href="wireframes/school-profile.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">05 — Wireframe</span>
+        <span class="card-title">School Profile</span>
+        <span class="card-desc">Single school — contact, about, instructor, styles, map</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+      <a href="wireframes/start-here.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">06 — Wireframe</span>
+        <span class="card-title">Start Here</span>
+        <span class="card-desc">New visitor welcome + Intro to Wushu</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+      <a href="wireframes/events.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">07 — Wireframe</span>
+        <span class="card-title">Events Calendar</span>
+        <span class="card-desc">Tournaments, seminars, clinics — powered by Pie Calendar</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+      <a href="wireframes/work-with-me.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">08 — Wireframe</span>
+        <span class="card-title">Work With Me</span>
+        <span class="card-desc">Web design, consulting, judging, content/media services</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+      <a href="style-guide/index.html" class="deliverable-card disabled">
+        <span class="card-label" style="color: var(--accent);">09 — Style Guide</span>
+        <span class="card-title">Style Guide</span>
+        <span class="card-desc">Typography, color, ACSS Edge component tokens</span>
+        <span class="status-badge status-draft">Not started</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Site IA reference -->
+  <section>
+    <div class="section-label">Site Architecture Reference</div>
+    <table class="ia-table">
+      <thead>
+        <tr>
+          <th>Page</th>
+          <th>URL</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Home</td>
+          <td><span class="url-code">/</span></td>
+          <td class="ia-note">Brand landing page — hero, content previews, school CTA, events</td>
+        </tr>
+        <tr>
+          <td>About</td>
+          <td><span class="url-code">/about/</span></td>
+          <td class="ia-note">Personal story, 30 years in wushu, WA mission, credentials</td>
+        </tr>
+        <tr>
+          <td>Start Here</td>
+          <td><span class="url-code">/start-here/</span></td>
+          <td class="ia-note">New visitor welcome + Intro to Wushu guide</td>
+        </tr>
+        <tr>
+          <td>Blog</td>
+          <td><span class="url-code">/blog/</span></td>
+          <td class="ia-note">Article archive — Adventures, Training, Wushu in China, Guides, Culture</td>
+        </tr>
+        <tr>
+          <td>Videos</td>
+          <td><span class="url-code">/videos/</span></td>
+          <td class="ia-note">Curated YouTube content with embed grid</td>
+        </tr>
+        <tr>
+          <td>Schools</td>
+          <td><span class="url-code">/schools/</span></td>
+          <td class="ia-note">Global school directory (CPT) — grid, list, map views</td>
+        </tr>
+        <tr>
+          <td>School Profile</td>
+          <td><span class="url-code">/schools/[slug]/</span></td>
+          <td class="ia-note">Individual school — contact, about, instructor, styles, location</td>
+        </tr>
+        <tr>
+          <td>Events</td>
+          <td><span class="url-code">/events/</span></td>
+          <td class="ia-note">Wushu events calendar — tournaments, seminars, clinics (Pie Calendar)</td>
+        </tr>
+        <tr>
+          <td>Work With Me</td>
+          <td><span class="url-code">/work-with-me/</span></td>
+          <td class="ia-note">Services: web design, consulting, judging, content/media</td>
+        </tr>
+        <tr>
+          <td>Contact</td>
+          <td><span class="url-code">/contact/</span></td>
+          <td class="ia-note">Fallback contact / linked from Work With Me</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <span>Wushu Adventures — Design Portal</span>
+  <span>Updated: June 2026</span>
+</footer>
+
+</body>
+</html>
